@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /admin
+Disallow: /secret
+
+# Hey there curious hacker! 
+# Flag{Please_dont_do_this_friend}
+# 
+# Since you made it this far, try connecting to port 1337 
+# (Just kidding, but you get the idea!)
