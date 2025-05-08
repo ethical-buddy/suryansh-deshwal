@@ -42,9 +42,6 @@ export function Hero() {
               {text}_
             </p>
             <div className="flex justify-center lg:justify-start gap-4">
-              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
-                View Projects
-              </Button>
             </div>
           </div>
           

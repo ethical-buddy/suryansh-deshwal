@@ -1,28 +1,38 @@
-
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Github, Linkedin, Mail, Twitter } from "lucide-react"
+"use client";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Github, Linkedin, Mail, Copy } from "lucide-react";
+import { useState } from "react";
 
 export function Contact() {
+  const [copied, setCopied] = useState(false);
+  const email = "suryanshdeshwal@gmail.com";
+
   const socialLinks = [
     {
       name: "GitHub",
       icon: Github,
-      url: "https://www.linkedin.com/in/suryansh-deshwal-7372b0262/"
+      url: "https://github.com/ethical-buddy",
     },
     {
       name: "LinkedIn",
       icon: Linkedin,
-      url: "https://www.linkedin.com/in/suryansh-deshwal-7372b0262/"
+      url: "https://www.linkedin.com/in/suryansh-deshwal-7372b0262/",
     },
-  ]
+  ];
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
     <section className="py-20 bg-background" id="contact">
       <div className="container px-4">
-        <Card className="max-w-4xl mx-auto">
+        <Card className="max-w-3xl mx-auto border-primary/20 shadow-md">
           <CardHeader>
-            <CardTitle className="text-3xl">Get In Touch</CardTitle>
+            <CardTitle className="text-3xl text-center">Get In Touch</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex flex-col items-center gap-6">
@@ -30,24 +40,38 @@ export function Contact() {
                 I'm always open to new opportunities and collaborations.
                 Feel free to reach out!
               </p>
-              <Button className="flex items-center gap-2">
-                <Mail className="w-4 h-4" />
-                <span>suryanshdeshwal@gmail.com</span>
-              </Button>
-              <div className="flex gap-4 mt-6">
+
+              <div className="flex items-center gap-3 bg-muted px-4 py-2 rounded-md">
+                <Mail className="w-5 h-5 text-primary" />
+                <a href={`mailto:${email}`} className="text-primary font-medium hover:underline">
+                  {email}
+                </a>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={handleCopy}
+                  className="w-6 h-6 text-muted-foreground hover:text-primary"
+                >
+                  <Copy className="w-4 h-4" />
+                </Button>
+                {copied && <span className="text-xs text-green-600">Copied</span>}
+              </div>
+
+              <div className="flex gap-6 mt-6">
                 {socialLinks.map((link, index) => {
-                  const Icon = link.icon
+                  const Icon = link.icon;
                   return (
                     <a
                       key={index}
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:text-primary transition-colors"
+                      className="flex flex-col items-center text-sm text-muted-foreground hover:text-primary transition-colors"
                     >
-                      <Icon className="w-6 h-6" />
+                      <Icon className="w-8 h-8" />
+                      <span className="mt-1">{link.name}</span>
                     </a>
-                  )
+                  );
                 })}
               </div>
             </div>
@@ -55,6 +79,6 @@ export function Contact() {
         </Card>
       </div>
     </section>
-  )
+  );
 }
 

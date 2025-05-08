@@ -1,6 +1,7 @@
 import Head from "next/head"
 import { Hero } from "@/components/portfolio/Hero"
 import { About } from "@/components/portfolio/About"
+import { vimgo } from "@/componentss/portfolio/vimgo"
 import { Experience } from "@/components/portfolio/Experience"
 import { Projects } from "@/components/portfolio/Projects"
 import { Contact } from "@/components/portfolio/Contacts"
@@ -20,6 +21,7 @@ export default function Home() {
 
       <main className="min-h-screen bg-background text-foreground">
         <Hero />
+	<vimgo />
         <Projects />
         <About />
         <Experience />
