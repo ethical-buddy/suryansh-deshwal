@@ -38,8 +38,8 @@ export function Contact() {
             <div className="flex flex-col items-center gap-6">
               <p className="text-lg text-muted-foreground text-center">
                 I'm always open to new opportunities and collaborations.
-                . The real pentesting is NDA signed . to know more about my hacking achievements 
-		Feel free to reach out!
+                 The real pentesting is NDA signed . to know more about my hacking achievements 
+		, Feel free to reach out!
               </p>
 
               <div className="flex items-center gap-3 bg-muted px-4 py-2 rounded-md">
