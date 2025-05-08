@@ -56,7 +56,7 @@ export function Hero() {
           <div className="relative flex-shrink-0">
             <div className="w-64 h-64 rounded-full overflow-hidden border-4 border-primary/50 relative">
               <Image
-                src="/profile.png"
+                src="https://media.licdn.com/dms/image/v2/D5635AQGtuPUnbC4NuQ/profile-framedphoto-shrink_400_400/profile-framedphoto-shrink_400_400/0/1727677380949?e=1747306800&v=beta&t=Eu4aEMlKezN1sY8enQEbklMGNWrOOCXVGTm7BQBLCwU"
                 alt="Profile Photo"
                 width={100}
                 height={200}
