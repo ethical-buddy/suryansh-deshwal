@@ -58,8 +58,8 @@ export function Hero() {
               <Image
                 src="https://media.licdn.com/dms/image/v2/D5635AQGtuPUnbC4NuQ/profile-framedphoto-shrink_400_400/profile-framedphoto-shrink_400_400/0/1727677380949?e=1747306800&v=beta&t=Eu4aEMlKezN1sY8enQEbklMGNWrOOCXVGTm7BQBLCwU"
                 alt="Profile Photo"
-                width={100}
-                height={200}
+                width={256}
+                height={256}
                 className="object-cover w-full h-full transition-all duration-300 ease-in-out transform hover:scale-105 shadow-xl"
               />
             </div>
