@@ -23,11 +23,13 @@ export function Projects() {
       github: "https://github.com/ethical-buddy/Vimgo",
       demo: "#",
       installSteps: [
-        "sudo apt install golang -y   # or 'dnf' for Fedora",
+        "sudo dnf copr enable ethical-buddy/vimgo"
+	"sudo dnf install vimgo"
+	"sudo apt install golang -y   # or 'dnf' for Fedora",
         "git clone https://github.com/ethical-buddy/Vimgo.git",
         "cd Vimgo",
-        "go build -o vimgo",
-        "sudo mv vimgo /usr/local/bin",
+        "./install.sh",
+        ,
       ],
     },
     {
