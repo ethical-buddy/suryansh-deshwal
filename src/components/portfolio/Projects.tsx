@@ -39,6 +39,23 @@ export function Projects() {
       github: "https://github.com/ethical-buddy/SIH24.git",
       demo: "#",
     },
+{
+  title: "TORONS",
+  description:
+    "A decentralized, credit-based web crawler built for OSINT and distributed indexing. Nodes operate autonomously, reward compute time with virtual credits, and ensure anti-censorship through peer-based exchange. Designed to scale across the dark web without needing Tor.",
+  tags: ["Python", "Asyncio", "Distributed", "P2P", "Crawler"],
+  github: "https://github.com/ethical-buddy/TORONS",
+  demo: "#",
+  installSteps: [
+    "git clone https://github.com/ethical-buddy/TORONS.git",
+    "cd TORONS",
+    "pip install -r requirements.txt",
+    "# optional: uvicorn main:app --reload",
+    "python3 torons.py --mode node --bootstrap",
+  ],
+},
+
+  
   ];
 
   return (
