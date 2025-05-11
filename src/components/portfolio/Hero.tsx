@@ -9,7 +9,7 @@ import GitHubCalendar from "react-github-calendar"
 export function Hero() {
   const [text, setText] = useState("")
   const fullText = "Ethical Hacker ,Cybersecurity Researcher & OS Developer"
-
+  const fullText = "> 🔐 *Everything is a file. Everything is a process. Everything is an exploit waiting to be discovered.*"
   useEffect(() => {
     let index = 0
     const timer = setInterval(() => {
