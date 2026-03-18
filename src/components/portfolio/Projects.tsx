@@ -1,128 +1,148 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Github, ExternalLink, Lock, Terminal, Download } from "lucide-react";
+import { Github, Cpu, Zap, Binary, ShieldAlert, Database, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export function Projects() {
   const projects = [
     {
+      title: "Cybersecure-X",
+      description: "India's first physical network CTF. Full-stack simulation of SCADA systems, DMZ environments, and industrial protocols.",
+      tags: ["Network Security", "SCADA", "CTF", "DMZ"],
+      github: "https://github.com/ethical-buddy",
+      type: "CORE_SEC_INFRA",
+      status: "STABLE"
+    },
+    {
       title: "Bumbellbee OS",
-      description:
-        "An operating system based on POSIX standards built completely from scratch for kernel developers & Hackers who are in search for understanding the kernels from the base level.",
-      tags: ["C", "Linux", "Assembly", "Security"],
+      description: "Custom-built POSIX-compliant kernel for security research. Features advanced memory isolation and custom syscall handling.",
+      tags: ["C", "Assembly", "Kernel", "Security"],
       github: "https://github.com/ethical-buddy/BumbelBee",
-      demo: "#",
+      type: "KERNEL_MODULE",
+      status: "BETA"
     },
     {
       title: "VIMGO",
-      description:
-        "A terminal-based file manager written in Go. Ideal for navigating files quickly in terminal environments. Built for speed, minimalism, and scripting.",
-      tags: ["Go", "Linux", "Automation", "Bash"],
+      description: "High-performance TUI file manager written in Go. Optimized for speed, low-latency navigation, and power-user workflows.",
+      tags: ["Go", "Linux", "TUI", "Automation"],
       github: "https://github.com/ethical-buddy/Vimgo",
-      demo: "#",
-      installSteps: [
-        "sudo dnf copr enable ethical-buddy/vimgo",
-	"sudo dnf install vimgo",
-	"sudo apt install golang -y   # or 'dnf' for Fedora",
-        "git clone https://github.com/ethical-buddy/Vimgo.git",
-        "./install.sh",
-        ,
-      ],
+      type: "SYS_UTILITY",
+      status: "PRODUCTION",
+      install: "sudo dnf copr enable ethical-buddy/vimgo"
     },
     {
-      title: "OS-Benchmarker",
-      description:
-        "Automated auditing tool that checks for CIS benchmark compliance across multiple OSes. Built for system hardening and audit reporting.",
-      tags: ["Go", "CIS", "Operating system"],
-      github: "https://github.com/ethical-buddy/SIH24.git",
-      demo: "#",
-    },
-{
-  title: "TORONS",
-  description:
-    "A decentralized, credit-based web crawler built for OSINT and distributed indexing. Nodes operate autonomously, reward compute time with virtual credits, and ensure anti-censorship through peer-based exchange. Designed to scale across the dark web without needing Tor.",
-  tags: ["Python", "Asyncio", "Distributed", "P2P", "Crawler"],
-  github: "https://github.com/ethical-buddy/TORONS",
-  demo: "#",
-  installSteps: [
-    "git clone https://github.com/ethical-buddy/TORONS.git",
-    "cd TORONS",
-    "pip install -r requirements.txt",
-    "# optional: uvicorn main:app --reload",
-    "python3 torons.py --mode node --bootstrap",
-  ],
-},
-
-  
+      title: "TORONS",
+      description: "Distributed P2P web crawler for OSINT research. Built for high-volume data extraction and decentralized indexing.",
+      tags: ["Python", "P2P", "OSINT", "Distributed"],
+      github: "https://github.com/ethical-buddy/TORONS",
+      type: "NET_CRAWLER",
+      status: "RESEARCH"
+    }
   ];
 
   return (
-    <section className="py-20 bg-background relative overflow-hidden" id="projects">
-      <div className="container px-4">
-        <div className="flex items-center gap-2 mb-12">
-          <Terminal className="w-6 h-6 text-primary" />
-          <h2 className="text-3xl font-bold">Projects</h2>
+    <section className="py-32 bg-background relative overflow-hidden" id="projects">
+      <div className="container px-4 relative z-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-24 border-b border-primary/10 pb-12">
+          <div className="space-y-4">
+            <div className="flex items-center gap-3 text-primary">
+              <Database className="w-8 h-8 animate-pulse" />
+              <span className="font-mono text-sm font-black tracking-[0.3em] uppercase">Authorized Project Access</span>
+            </div>
+            <h2 className="text-7xl font-black neon-glow-green uppercase tracking-tighter leading-none">
+              PROJECTS_<span className="text-white/20">DB</span>
+            </h2>
+          </div>
+          <Link href="https://github.com/ethical-buddy" target="_blank">
+            <Button className="cyber-button py-10 px-12 text-2xl group border-2">
+              <Github className="w-6 h-6 mr-4" />
+              MIRROR_ALL
+            </Button>
+          </Link>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <div className="grid lg:grid-cols-2 gap-12">
           {projects.map((project, index) => (
-            <Card
+            <motion.div
               key={index}
-              className="bg-card border-primary/20 hover:border-primary/50 transition-colors"
+              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: index * 0.1 }}
+              className="group"
             >
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Lock className="w-4 h-4 text-primary" />
-                  {project.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">{project.description}</p>
-
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map((tag, i) => (
-                    <span
-                      key={i}
-                      className="text-xs bg-primary/10 text-primary px-2 py-1 rounded"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                {project.installSteps && (
-                  <div className="mb-4">
-                    <div className="flex items-center gap-2 text-sm font-medium mb-2 text-primary">
-                      <Download className="w-4 h-4" />
-                      Install (Linux):
-                    </div>
-                    <pre className="bg-muted p-3 text-xs rounded overflow-x-auto whitespace-pre-wrap">
-{project.installSteps.join("\n")}
-                    </pre>
+              <Card className="glass-card rounded-none relative overflow-hidden group-hover:bg-primary/5 transition-all duration-700">
+                <div className="scanner-line group-hover:block hidden" />
+                
+                <div className="absolute top-0 right-0 flex">
+                  <div className="px-4 py-1 bg-primary/20 text-primary text-[10px] font-black border-l border-b border-primary/30 uppercase tracking-widest">
+                    {project.status}
                   </div>
-                )}
-
-                <div className="flex gap-2">
-                  <Link href={project.github} target="_blank">
-                    <Button variant="outline" size="sm" className="flex items-center gap-2">
-                      <Github className="w-4 h-4" />
-                      Code
-                    </Button>
-                  </Link>
-                  <Link href={project.demo} target="_blank">
-                    <Button variant="outline" size="sm" className="flex items-center gap-2">
-                      <ExternalLink className="w-4 h-4" />
-                      Demo
-                    </Button>
-                  </Link>
                 </div>
-              </CardContent>
-            </Card>
+
+                <div className="p-10 space-y-8">
+                  <div className="flex items-start justify-between">
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-3 text-primary/60 font-mono text-[10px] font-black uppercase">
+                        <Binary className="w-3 h-3" />
+                        ID: {project.type}
+                      </div>
+                      <CardTitle className="text-4xl font-black text-white group-hover:text-primary transition-colors leading-tight uppercase">
+                        {project.title}
+                      </CardTitle>
+                    </div>
+                    <Cpu className="w-10 h-10 text-primary opacity-20 group-hover:opacity-100 transition-all duration-500 rotate-12 group-hover:rotate-0" />
+                  </div>
+
+                  <p className="text-foreground/60 font-mono text-lg leading-relaxed border-l-2 border-primary/20 pl-6 group-hover:border-primary transition-colors duration-500 italic">
+                    &quot;{project.description}&quot;
+                  </p>
+
+                  <div className="flex flex-wrap gap-3">
+                    {project.tags.map((tag, i) => (
+                      <span
+                        key={i}
+                        className="text-[10px] font-black border border-primary/10 bg-black/40 px-4 py-1.5 text-primary/40 group-hover:text-primary group-hover:border-primary/40 transition-all"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {project.install && (
+                    <div className="bg-black/80 border border-primary/20 p-6 font-mono group-hover:border-primary/40 transition-all relative">
+                      <div className="absolute top-0 right-0 p-2 opacity-20">
+                        <ShieldAlert className="w-4 h-4 text-primary" />
+                      </div>
+                      <div className="text-[10px] font-black text-primary/60 mb-3 uppercase tracking-widest">
+                        System Deployment CMD:
+                      </div>
+                      <code className="text-sm text-primary break-all block">{project.install}</code>
+                    </div>
+                  )}
+
+                  <div className="pt-6">
+                    <Link href={project.github} target="_blank">
+                      <Button variant="outline" className="w-full border-2 border-primary/20 hover:bg-primary hover:text-black h-16 text-lg font-black uppercase rounded-none tracking-widest transition-all flex items-center justify-between px-10">
+                        ACCESS_SOURCE_CODE
+                        <ChevronRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+                
+                {/* Decorative Tech Elements */}
+                <div className="absolute bottom-2 right-2 text-[8px] font-mono text-primary/10 select-none">
+                  0x7F4A2B // v4.0.0
+                </div>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </div>
     </section>
   );
 }
-

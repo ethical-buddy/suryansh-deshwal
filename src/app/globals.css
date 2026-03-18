@@ -4,101 +4,119 @@
  
 @layer base {
   :root {
-    --background: 0 0% 0%;
-    --foreground: 210 40% 98%;
-    
-    --card: 0 0% 3%;
-    --card-foreground: 210 40% 98%;
+    /* Light Mode - "Solarized Cyber" */
+    --background: 0 0% 98%;
+    --foreground: 240 10% 10%;
+    --card: 0 0% 95%;
+    --card-foreground: 240 10% 10%;
+    --primary: 142 100% 30%; /* Deep Matrix Green */
+    --secondary: 180 100% 30%; /* Deep Cyber Teal */
+    --muted: 240 5% 90%;
+    --muted-foreground: 240 5% 40%;
+    --accent: 25 100% 50%; /* Warning Orange */
+    --border: 240 5% 85%;
+    --radius: 0rem;
+  }
  
-    --popover: 0 0% 3%;
-    --popover-foreground: 210 40% 98%;
- 
-    --primary: 120 100% 50%;
-    --primary-foreground: 0 0% 0%;
- 
-    --secondary: 120 50% 20%;
-    --secondary-foreground: 210 40% 98%;
- 
-    --muted: 120 50% 10%;
-    --muted-foreground: 215 20.2% 65.1%;
- 
-    --accent: 120 50% 20%;
-    --accent-foreground: 210 40% 98%;
- 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
- 
-    --border: 120 50% 20%;
-    --input: 120 50% 20%;
-    --ring: 120 100% 50%;
- 
-    --radius: 0.5rem;
+  .dark {
+    /* Dark Mode - "Deep Matrix" */
+    --background: 240 10% 2%;
+    --foreground: 142 70% 90%;
+    --card: 240 10% 4%;
+    --card-foreground: 142 70% 90%;
+    --primary: 142 100% 50%; 
+    --secondary: 180 100% 45%; 
+    --muted: 240 10% 10%;
+    --muted-foreground: 142 20% 60%;
+    --accent: 38 100% 50%; /* Neon Yellow/Orange */
+    --border: 142 50% 15%;
   }
 }
 
-@layer utilities {
-  .bg-background {
-    background-color: hsl(var(--background));
-  }
-  .text-foreground {
-    color: hsl(var(--foreground));
-  }
-}
- 
 @layer base {
-  * {
-   @apply border-border; 
-  }
+  * { @apply border-border; }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground selection:bg-primary selection:text-black;
+    overflow-x: hidden;
+    transition: background-color 0.3s, color 0.3s;
   }
 }
 
-.matrix-bg {
-  position: relative;
-  overflow: hidden;
+/* --- Blog Readability & Internal Colors --- */
+.blog-post-container {
+  @apply max-w-none font-mono;
+  font-size: 1.2rem; /* Medium-large readable size */
+  line-height: 1.9;  /* Spacious line height */
 }
 
-.matrix-bg::before {
-  content: "";
+.blog-post-container p {
+  @apply mb-8 text-foreground/90;
+}
+
+/* Headings */
+.blog-post-container h1 { @apply text-primary font-black text-5xl mb-12 uppercase tracking-tighter border-b-4 border-primary/20 pb-4; }
+.blog-post-container h2 { @apply text-primary font-black text-3xl mt-16 mb-8 uppercase border-l-8 border-primary pl-6 bg-primary/5 py-2; }
+.blog-post-container h3 { @apply text-secondary font-bold text-2xl mt-12 mb-6 flex items-center gap-3; }
+
+/* In-between Colors */
+.blog-post-container strong { 
+  @apply text-secondary font-black px-1 bg-secondary/5 border-b border-secondary/30; 
+}
+.blog-post-container em { 
+  @apply text-accent font-bold not-italic px-1 border-l-2 border-accent/50 ml-1; 
+}
+
+/* Blockquotes */
+.blog-post-container blockquote {
+  @apply border-l-4 border-primary bg-primary/5 p-8 my-10 italic text-foreground/80 relative overflow-hidden;
+}
+.blog-post-container blockquote::before {
+  content: "ANALYST_NOTE";
+  @apply absolute top-0 right-0 bg-primary/20 text-primary text-[10px] px-2 py-1 font-black not-italic;
+}
+
+/* Lists */
+.blog-post-container ul { @apply space-y-4 mb-10 list-none; }
+.blog-post-container ul li { @apply pl-8 relative; }
+.blog-post-container ul li::before {
+  content: ">>";
+  @apply absolute left-0 text-primary font-black;
+}
+
+.blog-post-container ol { @apply space-y-4 mb-10 list-decimal pl-8 text-primary; }
+.blog-post-container ol li { @apply text-foreground/90 pl-2; }
+
+/* Code Blocks */
+.blog-post-container pre {
+  @apply bg-black/95 border-2 border-primary/30 p-8 my-12 rounded-none shadow-2xl relative overflow-x-auto;
+}
+.blog-post-container pre code {
+  @apply text-primary bg-transparent p-0 text-base leading-relaxed;
+}
+.blog-post-container :not(pre) > code {
+  @apply bg-primary/10 text-primary px-2 py-0.5 rounded border border-primary/20 font-black;
+}
+
+/* Mouse & Cyber Effects */
+.scanlines::before {
+  content: " ";
+  display: block;
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(rgba(0, 255, 0, 0.05) 2px, transparent 2px),
-              linear-gradient(90deg, rgba(0, 255, 0, 0.05) 2px, transparent 2px);
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.05) 50%), 
+              linear-gradient(90deg, rgba(0, 255, 0, 0.01), rgba(0, 255, 120, 0.005), rgba(0, 255, 0, 0.01));
+  z-index: 50;
+  background-size: 100% 4px, 2px 100%;
+  pointer-events: none;
+}
+
+.cyber-grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(0, 255, 120, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 255, 120, 0.03) 1px, transparent 1px);
   background-size: 50px 50px;
-  animation: matrix 20s linear infinite;
-  z-index: 0;
 }
 
-@keyframes matrix {
-  0% { background-position: 0 0; }
-  100% { background-position: 50px 50px; }
+.neon-glow-green {
+  text-shadow: 0 0 10px hsla(var(--primary), 0.8), 0 0 20px hsla(var(--primary), 0.4);
 }
-
-.glitch {
-  position: relative;
-  animation: glitch 1s linear infinite;
-}
-
-@keyframes glitch {
-  2%, 64% { transform: translate(2px,0) skew(0deg); }
-  4%, 60% { transform: translate(-2px,0) skew(0deg); }
-  62% { transform: translate(0,0) skew(5deg); }
-}
-
-.terminal-text {
-  font-family: monospace;
-  position: relative;
-  overflow: hidden;
-  white-space: nowrap;
-  animation: typing 3.5s steps(40, end);
-}
-
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-
